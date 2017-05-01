@@ -42,12 +42,12 @@ server.start().then(() => {
 auto route:
 domain\api\server\health -> routedir\api\server_controller.js
 like: http://127.0.0.1:8090/api/server/health
-自动路由 寻址方式：
-controller 名称必须为xxxx_controller.js 才会被路由
-js中函数名称 为xxxAction 才会被export
-寻址可以多层
-暂时不支持自动重新加载， 动态修改后 必须重启服务
-http://127.0.0.1:8090/api/server/health 对应：
+###自动路由 寻址方式：
+#### controller 名称必须为xxxx_controller.js 才会被路由
+#### js中函数名称 为xxxAction 才会被export
+#### 寻址可以多层
+### 暂时不支持自动重新加载， 动态修改后 必须重启服务
+### http://127.0.0.1:8090/api/server/health 对应：
  1. server_controller.js 中的healthAction function
  2. server/health_controller.js 中的indexAction function （不建议使用）
 
