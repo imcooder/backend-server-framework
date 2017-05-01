@@ -39,7 +39,9 @@ server.start().then(() => {
     console.error('server start failed:', error);
 });
 ```
-http://127.0.0.1:8090/api/server/health
+auto route:
+domain\api\server\health -> routedir\api\server_controller.js
+like: http://127.0.0.1:8090/api/server/health
 
 api path -> api dir/*/*_controller.js
 server -> server_controller.js
