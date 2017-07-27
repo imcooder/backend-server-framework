@@ -30,7 +30,9 @@ function json(status, msg, data) {
 var BackendService = function(opt) {
     console.log("[backend_server]new:%j", opt);
     let self = this;
-    self.opt = {};
+    self.opt = {
+        allowCross: false,
+    };
     if (opt) {
         self.opt = _.extend(self.opt, opt);
     }
