@@ -4,19 +4,23 @@
  */
 /* eslint-disable fecs-camelcase */
 /* eslint-disable */
+/* jshint esversion:6 */
+/* jshint node:true */
+'use strict';
 var _ = require('underscore');
 var express = require('express');
 var fs = require('fs');
 var http = require('http');
 var bodyParser = require('body-parser');
-var cookieParser = require('cookie-parser')
+var cookieParser = require('cookie-parser');
 const path = require('path');
+var cors = require('cors');
 const loadRouter = require('express-autoload-router');
 
 function json(status, msg, data) {
-    var ret = {
+    let ret = {
         status: status || 0,
-        msg: msg || ''
+        msg: msg || '',
     };
     if (data) {
         ret.data = data;
@@ -25,7 +29,7 @@ function json(status, msg, data) {
 }
 var BackendService = function(opt) {
     console.log("[backend_server]new:%j", opt);
-    var self = this;
+    let self = this;
     self.opt = {};
     if (opt) {
         self.opt = _.extend(self.opt, opt);
@@ -34,15 +38,18 @@ var BackendService = function(opt) {
 };
 BackendService.prototype.start = function() {
     console.info("[backend_server]start");
-    var self = this;
+    let self = this;
     self.express = express();
     self.express.use(bodyParser.json({
-        limit: '10mb'
+        limit: '30mb'
     }));
     self.express.use(bodyParser.urlencoded({
         extended: true
     }));
     self.express.use(cookieParser());
+    if (self.opt.allowCross) {
+        self.express.use(cors());
+    }
     if (_.isArray(self.opt.router)) {
         self.opt.router.forEach(function(item) {
             loadRouter(self.express, item.router, item.path);
@@ -59,8 +66,8 @@ BackendService.prototype.start = function() {
         console.error('express:uncaughtException:%s', error.stack);
         return;
     });
-    var p = new Promise(function(resolve, reject) {
-        var port = self.opt.port || 8000;
+    let p = new Promise(function(resolve, reject) {
+        let port = self.opt.port || 8000;
         console.log('[backend_server]listen:%d', port);
         self.server = self.express.listen(port, function(error) {
             console.log('http callback:', error);
@@ -90,6 +97,6 @@ BackendService.prototype.stop = function() {
     }
 };
 module.exports.createServer = function(opt) {
-    var server = new BackendService(opt);
+    let server = new BackendService(opt);
     return server;
 };
