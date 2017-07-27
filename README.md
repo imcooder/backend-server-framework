@@ -24,11 +24,20 @@ npm i backend-server-framework -S
 var fs = require('fs');
 const path = require('path');
 const BackendService = require('backend-server-framework');
-
+var whitelist = ['http://example1.com', 'http://example2.com']
+let crossOptions = {
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  }
+};
 var server = BackendService.createServer({
     port: 8090, // port
     timeout: 6 * 3600000, //request timeout
-    allowCross: false, //disable cross access
+    crossOptions: crossOptions, //disable cross access
     router: [{  //router desc
         router: '/api', //path in url
         path: path.join(__dirname, './api/')  //local js controller file: filename must like xxx_controller.js

@@ -31,7 +31,7 @@ var BackendService = function(opt) {
     console.log("[backend_server]new:%j", opt);
     let self = this;
     self.opt = {
-        allowCross: false,
+        crossOptions: null,
     };
     if (opt) {
         self.opt = _.extend(self.opt, opt);
@@ -49,8 +49,8 @@ BackendService.prototype.start = function() {
         extended: true
     }));
     self.express.use(cookieParser());
-    if (self.opt.allowCross) {
-        self.express.use(cors());
+    if (self.opt.crossOptions !== null) {
+        self.express.use(cors(self.opt.crossOptions));
     }
     if (_.isArray(self.opt.router)) {
         self.opt.router.forEach(function(item) {
