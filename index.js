@@ -48,11 +48,11 @@ class BackendService {
         self.express.use(bodyParser.urlencoded({
             extended: true
         }));
-        self.express.use(cookieParser());        
+        self.express.use(cookieParser());
         if (self.opt.crossOptions !== null) {
             self.express.use(cors(self.opt.crossOptions));
         }
-        
+
         if (_.isArray(self.opt.router)) {
             self.opt.router.forEach(function (item) {
                 loadRouter(self.express, item.router, item.path);
