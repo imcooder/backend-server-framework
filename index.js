@@ -42,6 +42,7 @@ class BackendService {
     start() {
         console.info("[backend_server]start");
         let self = this;
+        /*
         self.express.use(bodyParser.json({
             limit: '30mb'
         }));
@@ -51,7 +52,7 @@ class BackendService {
         self.express.use(cookieParser());
         if (self.opt.crossOptions !== null) {
             self.express.use(cors(self.opt.crossOptions));
-        }
+        }*/
 
         if (_.isArray(self.opt.router)) {
             self.opt.router.forEach(function (item) {
