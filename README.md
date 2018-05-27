@@ -38,6 +38,7 @@ var server = BackendService.createServer({
     port: 8090, // port
     timeout: 6 * 3600000, //request timeout
     crossOptions: crossOptions, //disable cross access
+    middleware: [], // middleware array
     router: [{  //router desc
         router: '/api', //path in url
         path: path.join(__dirname, './api/')  //local js controller file: filename must like xxx_controller.js

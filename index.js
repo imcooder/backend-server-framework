@@ -7,6 +7,7 @@
 /* jshint esversion:6 */
 /* jshint node:true */
 'use strict';
+
 var _ = require('underscore');
 var express = require('express');
 var fs = require('fs');
@@ -42,6 +43,11 @@ class BackendService {
     start() {
         console.info("[backend_server]start");
         let self = this;
+        if (self.opt.middleware && _.isArray(self.opt.middleware)) {
+            self.opt.middleware.forEach(mw => {
+                self.express.use(mw);
+            });
+        }
         /*
         self.express.use(bodyParser.json({
             limit: '30mb'
@@ -50,9 +56,10 @@ class BackendService {
             extended: true
         }));
         self.express.use(cookieParser());
+        */
         if (self.opt.crossOptions !== null) {
             self.express.use(cors(self.opt.crossOptions));
-        }*/
+        }
 
         if (_.isArray(self.opt.router)) {
             self.opt.router.forEach(function (item) {
