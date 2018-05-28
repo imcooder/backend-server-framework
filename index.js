@@ -66,6 +66,11 @@ class BackendService {
                 loadRouter(self.express, item.router, item.path);
             });
         }
+        if (self.opt.middleware2 && _.isArray(self.opt.middleware2)) {
+            self.opt.middleware2.forEach(mw => {
+                self.express.use(mw);
+            });
+        }
         self.express.get('/', function (req, res) {
             res.send('hello world');
         });
