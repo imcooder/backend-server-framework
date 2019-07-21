@@ -1,6 +1,6 @@
 {
   "name": "backend-server-framework",
-  "version": "1.0.19",
+  "version": "1.0.20",
   "private": false,
   "description": "基于http服务的后台服务框架",
   "main": "index.js",

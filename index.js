@@ -4,7 +4,7 @@
  */
 /* eslint-disable fecs-camelcase */
 /* eslint-disable */
-/* jshint esversion:6 */
+/* jshint esversion:8 */
 /* jshint node:true */
 'use strict';
 
@@ -39,6 +39,8 @@ class BackendService {
             self.opt = _.extend(self.opt, opt);
         }
         self.express = express();
+        self.app = self.express;
+        self.e = express;
     }
     start() {
         console.info("[backend_server]start");
