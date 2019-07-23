@@ -21,7 +21,7 @@
     "crc": "0.2.0",
     "crypto": "0.0.3",
     "express": "^4.16.4",
-    "express-autoload-router": "^1.0.3",
+    "express-autoload-router": "^1.0.4",
     "fs": "0.0.1-security",
     "http": "0.0.0",
     "jsonschema": "^1.1.1",
