@@ -87,7 +87,11 @@ class BackendService {
         let p = new Promise(function (resolve, reject) {
             let port = self.opt.port || 8000;
             console.log('[backend_server]listen:%d', port);
-            self.server = self.express.listen(port, function (error) {
+            let host = '0.0.0.0';
+            if (self.opt.host) {
+                host = self.opt.host;
+            }
+            self.server = self.express.listen(port, host, function (error) {
                 console.log('http callback:', error);
                 if (_.has(self.opt, 'timeout')) {
                     self.server.timeout = self.opt.timeout;
