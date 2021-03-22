@@ -87,14 +87,15 @@ class BackendService {
         let p = new Promise(function (resolve, reject) {
             let port = self.opt.port || 8000;
             console.log('[backend_server]listen:%d', port);
-            self.server = self.express.listen(port, function (error) {
+            let httpCallBack = function (error) {
                 console.log('http callback:', error);
                 if (_.has(self.opt, 'timeout')) {
                     self.server.timeout = self.opt.timeout;
                 }
                 resolve();
                 return;
-            }).on('error', function (error) {
+            };
+            let errorCallBack = function (error) {
                 console.error('express listen error:%s', error.stack);
                 if (error.code === 'EADDRINUSE') {
                     reject(error);
@@ -102,7 +103,14 @@ class BackendService {
                 }
                 resolve();
                 return;
-            });
+            };
+            if (self.opt.host) {
+                self.server = self.express.listen(port, self.opt.host, httpCallBack).on('error', errorCallBack);
+            } else if (self.opt.ipv4) {
+                self.server = self.express.listen(port, '0.0.0.0', httpCallBack).on('error', errorCallBack);
+            } else {
+                self.server = self.express.listen(port, httpCallBack).on('error', errorCallBack);
+            }
         });
         return p;
     }
