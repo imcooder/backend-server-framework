@@ -106,10 +106,8 @@ class BackendService {
             };
             if (self.opt.host) {
                 self.server = self.express.listen(port, self.opt.host, httpCallBack).on('error', errorCallBack);
-            } else if (self.opt.ipv4) {
-                self.server = self.express.listen(port, '0.0.0.0', httpCallBack).on('error', errorCallBack);
             } else {
-                self.server = self.express.listen(port, httpCallBack).on('error', errorCallBack);
+                self.server = self.express.listen(port, '0.0.0.0', httpCallBack).on('error', errorCallBack);
             }
         });
         return p;
