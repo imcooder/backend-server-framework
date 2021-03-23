@@ -1,6 +1,6 @@
 {
   "name": "backend-server-framework",
-  "version": "1.0.22",
+  "version": "1.0.24",
   "private": false,
   "description": "基于http服务的后台服务框架",
   "main": "index.js",
@@ -21,7 +21,7 @@
     "crc": "0.2.0",
     "crypto": "0.0.3",
     "express": "^4.16.4",
-    "express-autoload-router": "^1.0.4",
+    "express-autoload-router": "^1.0.5",
     "fs": "0.0.1-security",
     "http": "0.0.0",
     "jsonschema": "^1.1.1",
